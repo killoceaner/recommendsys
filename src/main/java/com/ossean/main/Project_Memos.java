@@ -14,9 +14,9 @@ public class Project_Memos{
 
     public List<Integer> segMemos(){
         List<Integer> list = new LinkedList<>();
-        int length = relative_memos.length()-1;
-        String str = this.relative_memos.substring(1,length);
-        String[] tmps = str.split(",");
+        //int length = relative_memos.length()-1;
+        //String str = this.relative_memos.substring(1,length);
+        String[] tmps = relative_memos.split(",");
         for (String s:tmps){
             list.add(Integer.valueOf(s));
         }
@@ -38,5 +38,11 @@ public class Project_Memos{
         this.relative_memos = relative_memos;
     }
 
-
+    @Override
+    public String toString() {
+        return "Project_Memos{" +
+                "id=" + id +
+                ", relative_memos='" + relative_memos + '\'' +
+                '}';
+    }
 }

@@ -21,7 +21,7 @@ public class RelationCount {
     @Resource
     private FlowDao flowDao ;
 
-    private File sourceFile = new File("/Users/houxiang/Desktop/open_source_project/relative_memo_result.txt");
+    private File sourceFile = new File("/Users/houxiang/Desktop/open_source_project/relation_source_tmp.txt");
 
     private File targetFile = new File("/Users/houxiang/Desktop/open_source_project/result_of_relation");
 
@@ -70,7 +70,7 @@ public class RelationCount {
                 baseSets.addAll(list1);
                 baseSets.addAll(list2);
                 float relation_weight = countWeight(list1.size(),list2.size(),baseSets.size());
-                if (relation_weight>=0.003){
+                if (relation_weight>=0.003 && relation_weight !=1.0){
                     //String str = pm1.getId()+"\t"+pm2.getId()+"\t"+relation_weight+"\n";
                     line = new Line(pm1.getId() , pm2.getId() , relation_weight);
                     sortSets.add(line);
@@ -92,9 +92,8 @@ public class RelationCount {
         int count = 0 ;
         for (Line line : sets){
             count ++ ;
-            if (count<end){
-                list.add(line.toString());
-            }else{
+            if (count<end) list.add(line.toString());
+            else{
                 break;
             }
         }
@@ -119,6 +118,7 @@ public class RelationCount {
                 if (tmps.length ==2) {
                     pm.setId(Integer.parseInt(tmps[0]));
                     pm.setRelative_memos(tmps[1]);
+                    System.out.println(pm);
                     promList.add(pm);
                 }
             }
@@ -131,7 +131,7 @@ public class RelationCount {
         ApplicationContext aContext = new ClassPathXmlApplicationContext(
                 "classpath:/spring/applicationContext*.xml");
         RelationCount rc = aContext.getBean(RelationCount.class);
-        rc.Count();
+        rc.Count2();
     }
 }
 
